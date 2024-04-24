@@ -45,9 +45,19 @@ echo "Connecting to $server on port $port and create repository $repo..."
 ssh $server -p $port "
   cd $gitdir
   mkdir $repo
-  sudo chown git $repo
+  chown git $repo
   cd $repo
   git init --bare
   sudo chown -R git *
 "
 echo "created repo $repo."
+
+echo "Trying to push intial commit ..."
+
+git clone ssh://git@${optserver}/${gitdir}/${repo}
+cd $repo
+touch README.md
+git add README.md
+git commit -m "initial commit"
+git push
+cd -
