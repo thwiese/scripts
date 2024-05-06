@@ -45,7 +45,7 @@ echo "Connecting to $server on port $port and create repository $repo..."
 ssh $server -p $port "
   cd $gitdir
   mkdir $repo
-  chown git $repo
+  sudo chown git $repo
   cd $repo
   git init --bare
   sudo chown -R git *
